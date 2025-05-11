@@ -1,0 +1,28 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ambiente virtual
+venv/
+.env
+.env.*
+
+# Editor e IDEs
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs e caches
+*.log
+*.sqlite3
+*.db
+
+# Deploy
+*.zip
+build/
+dist/
+*.egg-info/

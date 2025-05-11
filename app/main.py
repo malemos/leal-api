@@ -29,7 +29,14 @@ TRUSTED_ORIGINS = set(origins) if "*" not in origins else set()
 @app.post("/cadastro")
 async def create_cliente(cliente: schemas.ClienteCreate, request: Request, db: Session = Depends(get_db)):
     origin = request.headers.get("origin")
-    if TRUSTED_ORIGINS and origin not in TRUSTED_ORIGINS:
+    if "*" not in origins and origin not in TRUSTED_ORIGINS:
         raise HTTPException(status_code=403, detail="Acesso não autorizado.")
-    
-    return crud.create_cliente(db=db, cliente=cliente)
+
+    cliente_salvo = crud.create_cliente(db=db, cliente=cliente)
+    return {
+        "id": cliente_salvo.id,
+        "nome": cliente_salvo.nome,
+        "email": cliente_salvo.email,
+        "cpfcnpj": cliente_salvo.cpfcnpj,
+        "servico": cliente_salvo.servico
+    }
